@@ -103,6 +103,8 @@ int main()
 			cout << " Average mark: " << Groups[i][j].averMark << endl;
 		}
 	}
+	delete[] Students;
+	delete[] Groups;
 	_getch();
 	return 0;
 }

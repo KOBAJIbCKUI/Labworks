@@ -10,17 +10,16 @@ int main()
 {
 	cout << "This program inputs sequences of zeros, ones and spaces," << endl;
 	cout << "counts words and counts words that are multiple of 5" << endl;
-	string inputString = "01001010 0101010101010 01111001010 1001010010010101011 010101001 0 1 101 11"; //74 2730
+	const string inputString = "01001010 0101010101010 01111001010 1001010010010101011 010101001 0 1 101 11"; 
 	cout << "Input string is " << inputString << endl;
-	stack<string> Words; //Stack for words
+	const int One = 49;//One in ASCII
 	string buffer; //Buffer for chars
 	int counter = 0; //Counter for words and numbers multiple of 5
 	char curChar; //Current char
 	bool Space = true; //Is current char is space
+	stack<string> Words; //Stack for words
 
-	//Count words and push to stack
-
-	for (int i = 0; i <= inputString.length(); i++)
+	for (int i = 0; i <= inputString.length(); i++)//Count words and push to stack
 	{
 		curChar = inputString[i];
 		if (!(curChar == ' ' || curChar == '\t' || curChar == '\0'))
@@ -41,7 +40,6 @@ int main()
 	counter = 0;
 
 	//Convert word to numbers and find multiple of 5
-
 	string curStringNumber; //Word to convert
 	int curIntNumber; //Converted word 
 	while (!Words.empty())
@@ -51,17 +49,9 @@ int main()
 		Words.pop();
 		for (int i = curStringNumber.length()-1; i >= 0; i--)
 		{
-			switch (curStringNumber[i])
-			{
-				case 49 :
-				{
-					curIntNumber += pow(2, curStringNumber.length() - (i+1));
-					break;
-				}//end case 49
-				default :
-					break;
-			}//end switch
-		}//end for
+			if (curStringNumber[i] == One)
+				curIntNumber += pow(2, curStringNumber.length() - (i+1));
+		}
 		if (curIntNumber != 0 && curIntNumber % 5 == 0)
 			counter++;
 	}
